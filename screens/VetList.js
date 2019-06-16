@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
 import List from '../yelpapi/Ylistview';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 /* ----------------GETS THE USERS LOCATION----------------------- */
 import { Location, Permissions } from 'expo';
@@ -86,6 +87,11 @@ export default class VetList extends React.Component {
 					</View> */}
 				<View style={styles.titlecontainer}>
 					<Text style={styles.title}>Vets</Text>
+					<Button
+						style={styles.title}
+						title="Go to Details"
+						onPress={() => this.props.navigation.navigate('VetDetails')}
+					/>
 				</View>
 				{/* </View> */}
 				<List
@@ -102,8 +108,7 @@ export default class VetList extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
-		marginTop: 25
+		backgroundColor: '#fff'
 	},
 	// headermenu: {
 	// 	alignItems: 'flex-start',
@@ -123,7 +128,6 @@ const styles = StyleSheet.create({
 		// flex: 0.8,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#6666FF',
-		marginTop: 10
+		backgroundColor: '#6666FF'
 	}
 });

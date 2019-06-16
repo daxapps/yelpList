@@ -8,36 +8,36 @@ export default function HomeScreen() {
 	return (
 		<View style={styles.container}>
 			<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-				<View style={styles.welcomeContainer}>
-					<Image
-						source={
-							__DEV__ ? (
-								require('../assets/images/robot-dev.png')
-							) : (
-								require('../assets/images/robot-prod.png')
-							)
-						}
-						style={styles.welcomeImage}
-					/>
-				</View>
+				{/* <View style={styles.welcomeContainer}>
+				<Image
+					source={
+						__DEV__ ? (
+							require('../assets/images/robot-dev.png')
+						) : (
+							require('../assets/images/robot-prod.png')
+						)
+					}
+					style={styles.welcomeImage}
+				/>
+			</View> */}
 
 				<View style={styles.getStartedContainer}>
-					<DevelopmentModeNotice />
+					{/* <DevelopmentModeNotice /> */}
 
 					<Text style={styles.getStartedText}>Yelp List</Text>
 
-					<View style={[ styles.codeHighlightContainer, styles.homeScreenFilename ]}>
+					{/* <View style={[ styles.codeHighlightContainer, styles.homeScreenFilename ]}>
 						<MonoText>screens/HomeScreen.js</MonoText>
-					</View>
+					</View> */}
 
-					<Text style={styles.getStartedText}>Change this text and your app will automatically reload.</Text>
+					<Text style={styles.getStartedText}>App description, signin and signup</Text>
 				</View>
 
-				<View style={styles.helpContainer}>
+				{/* <View style={styles.helpContainer}>
 					<TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
 						<Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
 					</TouchableOpacity>
-				</View>
+				</View> */}
 			</ScrollView>
 
 			<View style={styles.tabBarInfoContainer}>

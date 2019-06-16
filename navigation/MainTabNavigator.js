@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import VetList from '../screens/VetList';
+import VetDetails from '../screens/VetDetails';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const HomeStack = createStackNavigator({
@@ -23,13 +24,21 @@ HomeStack.navigationOptions = {
 	)
 };
 
-const LinksStack = createStackNavigator({
-	Links: VetList
-});
+const VetListStack = createStackNavigator(
+	{
+		VetList: VetList,
+		VetDetails: VetDetails
+	},
+	{
+		initialRouteName: 'VetList'
+	}
+);
 
-LinksStack.navigationOptions = {
+VetListStack.navigationOptions = {
 	tabBarLabel: 'Vets',
-	tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+	tabBarIcon: ({ focused }) => (
+		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'logo-octocat' : 'md-link'} />
+	)
 };
 
 const SettingsStack = createStackNavigator({
@@ -45,6 +54,6 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
 	HomeStack,
-	LinksStack,
+	VetListStack,
 	SettingsStack
 });
