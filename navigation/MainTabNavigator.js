@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import FoodList from '../screens/FoodList';
+import VetList from '../screens/VetList';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const HomeStack = createStackNavigator({
@@ -24,11 +24,11 @@ HomeStack.navigationOptions = {
 };
 
 const LinksStack = createStackNavigator({
-	Links: FoodList
+	Links: VetList
 });
 
 LinksStack.navigationOptions = {
-	tabBarLabel: 'Links',
+	tabBarLabel: 'Vets',
 	tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
 };
 

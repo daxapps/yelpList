@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, SafeAreaView, Button, FlatList } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
 import List from '../yelpapi/Ylistview';
 
 /* ----------------GETS THE USERS LOCATION----------------------- */
@@ -24,10 +24,10 @@ const deltas = {
 };
 
 //Talked about missing component, added class and made it React.Component and it worked
-export default class FoodList extends React.Component {
+export default class VetList extends React.Component {
 	state = {
 		region: null,
-		foodPlaces: [] //coffeeShops
+		vetPlaces: [] //coffeeShops
 	};
 
 	componentWillMount() {
@@ -36,11 +36,11 @@ export default class FoodList extends React.Component {
 	/* ----------------GETS THE USERS LOCATION AND TELL APP HOW MUCH TO ZOOM IN----------------------- */
 
 	/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
-	getFoodPlaces = async () => {
+	getVetPlaces = async () => {
 		const { latitude, longitude } = this.state.region;
 		const userLocation = { latitude, longitude };
-		const foodPlaces = await YelpService.getFoodPlaces(userLocation);
-		this.setState({ foodPlaces });
+		const vetPlaces = await YelpService.getVetPlaces(userLocation);
+		this.setState({ vetPlaces });
 	};
 
 	/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
@@ -65,7 +65,7 @@ export default class FoodList extends React.Component {
 		/* ----------------GETS THE USERS LOCATION----------------------- */
 
 		/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
-		await this.getFoodPlaces(); //getCoffeeShops
+		await this.getVetPlaces(); //getCoffeeShops
 		/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
 
 		/* ----------------GETS THE USERS LOCATION----------------------- */
@@ -90,7 +90,7 @@ export default class FoodList extends React.Component {
 				{/* </View> */}
 				<List
 					region={region}
-					places={this.state.foodPlaces}
+					places={this.state.vetPlaces}
 					keyExtractor={(item, index) => item[0].toString()}
 				/>
 			</View>
