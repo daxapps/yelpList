@@ -97,7 +97,7 @@ export default class VetList extends React.Component {
 				<List
 					region={region}
 					places={this.state.vetPlaces}
-					keyExtractor={(item, index) => item[0].toString()}
+					// keyExtractor={(item, index) => item[0].toString()}
 				/>
 			</View>
 		);

@@ -5,16 +5,16 @@ import { Linking, Button, AppRegistry, Image } from 'react-native';
 
 export default class List extends Component {
 	renderPlaces() {
-		let Image_Http_URL = { uri: '' };
+		// let Image_Http_URL = { uri: '' };
 
-		return this.props.places.map((place, i) => (
-			<View style={styles.container}>
+		return this.props.places.map((place, key) => (
+			<View key={key} style={styles.container}>
 				<View>
-					<Image style={styles.image} source={{ uri: '' + place.imageURL }} />
+					<Image style={styles.image} source={{ uri: place.imageURL }} />
 				</View>
 
-				<View style={{ padding: 10, flex: 1, fontSize: 10 }}>
-					<Text style={styles.phoneTextTitle} onPress={() => Linking.openURL('' + place.url)}>
+				<View style={{ padding: 10, flex: 1, fontSize: 9 }}>
+					<Text style={styles.phoneTextTitle} onPress={() => Linking.openURL(place.url)}>
 						{place.name}
 					</Text>
 					<Text>Rating: {place.rating} stars</Text>
@@ -22,7 +22,8 @@ export default class List extends Component {
 					<Text style={styles.phoneText} onPress={() => Linking.openURL('tel:' + place.phone)}>
 						{place.phone}
 					</Text>
-					<Text>Distance from you: {(place.distance / 1609).toFixed(1)} miles</Text>
+					<Text>Distance: {(place.distance / 1609).toFixed(1)} miles</Text>
+					<Button title="Fees" />
 				</View>
 			</View>
 		));

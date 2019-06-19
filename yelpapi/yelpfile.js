@@ -12,8 +12,8 @@ const api = axios.create({
 
 //this.props.navigation.state.params.user_name  //THIS RECEIVES
 
-const cats = 'vet, All';
-const uradius = 3000;
+const vets = 'vet, All';
+const uradius = 30000;
 const ulimit = 20;
 //Refreshing on app works
 
@@ -26,9 +26,9 @@ const getVetPlaces = (userLocation) => {
 				params: {
 					radius: uradius, //this is in meteres, max 40000
 					limit: ulimit,
-					//sort_by: 'distance',
+					sort_by: 'distance',
 					//categories: 'coffee,coffeeroasteries,coffeeshops',
-					categories: cats, //Determines yelp categories
+					categories: vets, //Determines yelp categories
 
 					...userLocation
 				}
@@ -38,6 +38,7 @@ const getVetPlaces = (userLocation) => {
 				res.data.businesses.map((business) => {
 					return {
 						name: business.name,
+						id: business.id,
 						// coords: business.coordinates,
 						phone: business.phone,
 						city: business.location.display_address,
