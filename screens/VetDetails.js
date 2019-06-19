@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, SafeAreaView, Button, TextInput } from 'react-native';
 
 export default class VetDetails extends React.Component {
 	render() {

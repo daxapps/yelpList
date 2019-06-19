@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-// import { IconButton, Colors } from 'react-native-paper';
+import { View, Text, ScrollView, StyleSheet, FlatList, Row } from 'react-native';
 import { Linking, Button, AppRegistry, Image } from 'react-native';
 
 export default class List extends Component {
-	renderPlaces() {
-		// let Image_Http_URL = { uri: '' };
-
-		return this.props.places.map((place, key) => (
-			<View key={key} style={styles.container}>
-				<View>
-					<Image style={styles.image} source={{ uri: place.imageURL }} />
-				</View>
-
-				<View style={{ padding: 10, flex: 1, fontSize: 9 }}>
-					<Text style={styles.phoneTextTitle} onPress={() => Linking.openURL(place.url)}>
-						{place.name}
-					</Text>
-					<Text>Rating: {place.rating} stars</Text>
-					<Text>{place.city}</Text>
-					<Text style={styles.phoneText} onPress={() => Linking.openURL('tel:' + place.phone)}>
-						{place.phone}
-					</Text>
-					<Text>Distance: {(place.distance / 1609).toFixed(1)} miles</Text>
-					<Button title="Fees" />
-				</View>
-			</View>
-		));
-	}
-
 	render() {
 		const { region } = this.props;
 		return (
 			<View style={styles.container}>
-				<ScrollView>{this.renderPlaces()}</ScrollView>
+				<FlatList
+					data={this.props.places}
+					keyExtractor={(item, index) => item.id}
+					renderItem={({ item }) => (
+						<View style={styles.container}>
+							<View>
+								<Image style={styles.image} source={{ uri: item.imageURL }} />
+							</View>
+							<View style={{ padding: 10, flex: 1, fontSize: 9 }}>
+								<Text style={styles.phoneTextTitle} onPress={() => Linking.openURL(item.url)}>
+									{item.name}
+								</Text>
+								<Text>Rating: {item.rating} stars</Text>
+								<Text>{item.city}</Text>
+								<Text style={styles.phoneText} onPress={() => Linking.openURL('tel:' + item.phone)}>
+									{item.phone}
+								</Text>
+								<Text>Distance: {(item.distance / 1609).toFixed(1)} miles</Text>
+								<Button title="Fees" />
+							</View>
+						</View>
+					)}
+				/>
 			</View>
 		);
 	}

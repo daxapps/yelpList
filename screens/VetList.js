@@ -2,14 +2,10 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
 import List from '../yelpapi/Ylistview';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-
-/* ----------------GETS THE USERS LOCATION----------------------- */
+// GETS THE USERS LOCATION
 import { Location, Permissions } from 'expo';
-/* ----------------GETS THE USERS LOCATION----------------------- */
-
-/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
+// GETS LOCATIONS FOR VETS
 import YelpService from '../yelpapi/yelpfile';
-/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
 
 // A placeholder until we get our own location
 const region = {
@@ -28,15 +24,13 @@ const deltas = {
 export default class VetList extends React.Component {
 	state = {
 		region: null,
-		vetPlaces: [] //coffeeShops
+		vetPlaces: []
 	};
 
 	componentWillMount() {
 		this.getLocationAsync();
 	}
-	/* ----------------GETS THE USERS LOCATION AND TELL APP HOW MUCH TO ZOOM IN----------------------- */
 
-	/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
 	getVetPlaces = async () => {
 		const { latitude, longitude } = this.state.region;
 		const userLocation = { latitude, longitude };
@@ -44,9 +38,6 @@ export default class VetList extends React.Component {
 		this.setState({ vetPlaces });
 	};
 
-	/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
-
-	/* ----------------GETS THE USERS LOCATION----------------------- */
 	getLocationAsync = async () => {
 		let { status } = await Permissions.askAsync(Permissions.LOCATION);
 		if (status !== 'granted') {
@@ -62,14 +53,7 @@ export default class VetList extends React.Component {
 			...deltas
 		};
 		await this.setState({ region });
-
-		/* ----------------GETS THE USERS LOCATION----------------------- */
-
-		/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
-		await this.getVetPlaces(); //getCoffeeShops
-		/* ----------------GETS LOCATIONS FOR COFFEE SHOPS----------------------- */
-
-		/* ----------------GETS THE USERS LOCATION----------------------- */
+		await this.getVetPlaces();
 	};
 	/* ----------------NOTE FOR BOTTOM, LIST REMOVES OR PUSHES UP THE TOP NAVIGATION----------------------- */
 	render() {
@@ -94,11 +78,7 @@ export default class VetList extends React.Component {
 					/>
 				</View>
 				{/* </View> */}
-				<List
-					region={region}
-					places={this.state.vetPlaces}
-					// keyExtractor={(item, index) => item[0].toString()}
-				/>
+				<List region={region} places={this.state.vetPlaces} />
 			</View>
 		);
 	}

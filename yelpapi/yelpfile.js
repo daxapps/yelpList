@@ -14,7 +14,7 @@ const api = axios.create({
 
 const vets = 'vet, All';
 const uradius = 30000;
-const ulimit = 20;
+const ulimit = 50;
 //Refreshing on app works
 
 const getVetPlaces = (userLocation) => {
