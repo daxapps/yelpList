@@ -13,7 +13,11 @@ export default class List extends Component {
 					renderItem={({ item }) => (
 						<View style={styles.container}>
 							<View>
-								<Image style={styles.image} source={{ uri: item.imageURL }} />
+								<Image
+									style={styles.image}
+									source={{ uri: item.imageURL }}
+									defaultSource={require('../assets/images/puppyKitten.png')}
+								/>
 							</View>
 							<View style={{ padding: 10, flex: 1, fontSize: 9 }}>
 								<Text style={styles.phoneTextTitle} onPress={() => Linking.openURL(item.url)}>
@@ -56,6 +60,6 @@ const styles = StyleSheet.create({
 	image: {
 		width: 100,
 		height: 100,
-		resizeMode: 'stretch'
+		resizeMode: 'cover'
 	}
 });
