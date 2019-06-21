@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
+import { FlatList, StyleSheet, Text, View, SafeAreaView, Button, TouchableOpacity, Linking, Image } from 'react-native';
 import List from '../yelpapi/Ylistview';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+// import { createStackNavigator, createAppContainer } from 'react-navigation';
 // GETS THE USERS LOCATION
 import { Location, Permissions } from 'expo';
 // GETS LOCATIONS FOR VETS
@@ -57,49 +57,62 @@ export default class VetList extends React.Component {
 	};
 	/* ----------------NOTE FOR BOTTOM, LIST REMOVES OR PUSHES UP THE TOP NAVIGATION----------------------- */
 	render() {
+		// const { region } = this.props;
 		return (
 			<View style={styles.container}>
-				{/* <View style={styles.headermenu}> */}
-				{/*TO CREATE TITLE FOR HEADER, NEED VIEWS WITHIN VIEWS, ONE FOR MENU AND OTHER FOR TITLE AND THEN A CONTAINER FOR THE TWO*/}
-				{/* <View>
-						<Button
-							icon="menu"
-							color="black"
-							size={50}
-							onPress={() => this.props.navigation.navigate('DrawerToggle')}
-						/>
-					</View> */}
 				<View style={styles.titlecontainer}>
 					<Text style={styles.title}>Vets</Text>
-					<Button
-						style={styles.title}
-						title="Go to Details"
-						onPress={() => this.props.navigation.navigate('VetDetails')}
+				</View>
+				<View style={styles.listContainer}>
+					<FlatList
+						data={this.state.vetPlaces}
+						keyExtractor={(item, index) => item.id}
+						renderItem={({ item }) => (
+							<View style={styles.listContainer}>
+								<View>
+									<Image
+										style={styles.image}
+										source={{ uri: item.imageURL }}
+										defaultSource={require('../assets/images/puppyKitten.png')}
+									/>
+								</View>
+								<View style={{ padding: 10, flex: 1, fontSize: 9 }}>
+									<Text style={styles.phoneTextTitle} onPress={() => Linking.openURL(item.url)}>
+										{item.name}
+									</Text>
+									<Text>Rating: {item.rating} stars</Text>
+									<Text>{item.city}</Text>
+									<Text style={styles.phoneText} onPress={() => Linking.openURL('tel:' + item.phone)}>
+										{item.phone}
+									</Text>
+									<Text>Distance: {(item.distance / 1609).toFixed(1)} miles</Text>
+									<TouchableOpacity onPress={() => this.props.navigation.navigate('VetDetails')}>
+										<Text>Fees</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+						)}
 					/>
 				</View>
-				{/* </View> */}
-				<List region={region} places={this.state.vetPlaces} />
 			</View>
 		);
 	}
 }
-/* ----------------GETS THE USERS LOCATION----------------------- */
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#fff'
 	},
-	// headermenu: {
-	// 	alignItems: 'flex-start',
-	// 	justifyContent: 'flex-start',
-	// 	flex: 0.09,
-	// 	backgroundColor: '#6666FF',
-	// 	flexDirection: 'row',
-	// 	marginTop: 25
-	// },
+	listContainer: {
+		flex: 1,
+		backgroundColor: '#F5FCFF',
+		flexDirection: 'row',
+		alignItems: 'center',
+		borderBottomColor: '#F0F0F0',
+		borderBottomWidth: 5
+	},
 	title: {
-		// fontFamily: 'Marker Felt',
 		fontSize: 15,
 		color: '#E7E7E6',
 		margin: 10
@@ -109,5 +122,20 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#6666FF'
+	},
+	phoneText: {
+		color: '#E91E63',
+		textDecorationLine: 'underline'
+	},
+	phoneTextTitle: {
+		color: 'black',
+		textDecorationLine: 'underline',
+		fontWeight: 'bold',
+		fontSize: 14
+	},
+	image: {
+		width: 100,
+		height: 100,
+		resizeMode: 'cover'
 	}
 });
